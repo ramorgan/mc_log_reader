@@ -11,28 +11,15 @@ use Symfony\Component\Routing\Annotation\Route;
 class MinecraftController {
 
   /**
-   * @Route("/mc/{version}/{number}")
+   * @Route("/mc/{number}")
    *
    */
-  public function landing($version = '', $number = NULL) {
+  public function landing($number = NULL) {
 
     $body = "";
 
-
-    switch ($version) {
-      //Bedrock Edition
-      case 'be':
-        $file_path = "/home/server/Minecraft/Minecraft_";
-      case 'java':
-        $file_path = "/home/server/Minecraft/Minecraft_Java_wPlugins/logs/latest.log";
-        break;
-      default:
-        $file_path = "/home/server/Minecraft/Minecraft_Java_wPlugins/logs/latest.log";
-    }
-    $logFile = new PathLogFile("../minecraft_logs/latest.log");
-
-    //    $log = new VanillaLog();
-    //    $log->setLogFile($logFile);
+    $file_path = "/home/server/Minecraft/Minecraft_Java_wPlugins/logs/latest.log";
+    $logFile = new PathLogFile($file_path);
 
     $detective = new Detective();
     $detective->setLogFile($logFile);
